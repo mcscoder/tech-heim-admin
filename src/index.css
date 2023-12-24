@@ -12,6 +12,23 @@
   body {
     @apply font-inter;
   }
+
+  table {
+    @apply border-collapse;
+  }
+
+  tr:nth-child(even) {
+    @apply bg-[#dddddd];
+  }
+
+  tr:nth-child(even) td {
+    @apply border-white;
+  }
+
+  td,
+  th {
+    @apply border border-[#dddddd] text-center whitespace-nowrap p-3;
+  }
 }
 
 @layer utilities {
