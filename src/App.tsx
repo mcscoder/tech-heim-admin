@@ -1,7 +1,12 @@
+import { AppState } from "./Providers";
 import { AppProvider } from "./routes";
 
 function App() {
-  return <AppProvider />;
+  return (
+    <AppState>
+      <AppProvider />
+    </AppState>
+  );
 }
 
 export default App;

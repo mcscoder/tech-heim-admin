@@ -1,9 +1,15 @@
 import { ProductContext } from "@/contexts";
+import { useProductContext } from "@/hooks";
 import { Product } from "@/pages";
 import { CommonTypes, ProductTypes } from "@/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const InitialProductRowsState = ({ children }: CommonTypes.ChildrenProp) => {
+  const { getProduct } = useProductContext();
+  useEffect(() => {
+    getProduct();
+  }, []);
+
   return children;
 };
 

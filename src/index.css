@@ -17,17 +17,13 @@
     @apply border-collapse;
   }
 
-  tr:nth-child(even) {
-    @apply bg-[#dddddd];
-  }
-
   tr:nth-child(even) td {
-    @apply border-white;
+    @apply border-white bg-[#dddddd];
   }
 
   td,
   th {
-    @apply border border-[#dddddd] text-center whitespace-nowrap p-3;
+    @apply border border-[#dddddd] text-center whitespace-nowrap p-3 bg-clip-padding;
   }
 }
 
