@@ -44,3 +44,19 @@ export interface ProductGroup {
   title: string;
   productType: ProductType[];
 }
+
+export interface ProductId {
+  id: number;
+}
+
+export type ProductRequestBody = Pick<
+  Product,
+  "name" | "currentPrice" | "lastPrice" | "quantity" | "categoryId"
+>;
+
+export type ProductTypeRequestBody = Pick<Product, "productTypeId"> & ProductId;
+
+export type ProductTechnicalRequestBody = Pick<Product, "productTechnical"> &
+  ProductId;
+
+export type ProductImageRequestBody = Pick<Product, "productImage"> & ProductId;

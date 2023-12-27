@@ -1,6 +1,9 @@
 import { ProductDetailedContext } from "@/contexts";
-import { ProductTypes } from "@/types";
+import { CommonTypes, ProductTypes } from "@/types";
 import { useContext, useRef, useState } from "react";
+import { useLoaderContext } from ".";
+import { getRequestURL } from "@/utils";
+import axios from "axios";
 
 export const useProductDetailedContext = () => {
   const productDetailedContext = useContext(ProductDetailedContext);
@@ -16,6 +19,7 @@ export const useProductDetailedContext = () => {
   const [productGroups, setProductGroups] = useState<
     ProductTypes.ProductGroup[]
   >([]);
+  const { handleFetchApi } = useLoaderContext();
 
   const currentProductTypeId = useRef<{ [key: number]: number | undefined }>(
     {}
@@ -180,6 +184,62 @@ export const useProductDetailedContext = () => {
   };
 
   /* Handle request to server */
+  const handleAddProduct = () => {
+    handleFetchApi(async () => {
+      try {
+        // Request add product
+        const productURL = getRequestURL("product");
+        const productRequestBody: ProductTypes.ProductRequestBody = {
+          name: productDetailed.name,
+          currentPrice: productDetailed.currentPrice,
+          lastPrice: productDetailed.lastPrice,
+          quantity: productDetailed.quantity,
+          categoryId: productDetailed.categoryId,
+        };
+        const productResponse = await axios.post<ProductTypes.ProductId>(
+          productURL,
+          productRequestBody
+        );
+        const productId = productResponse.data.id;
+
+        // Request add product type
+        const productTypeURL = getRequestURL("productType");
+        const productTypeRequestBody: ProductTypes.ProductTypeRequestBody = {
+          id: productId,
+          productTypeId: productDetailed.productTypeId,
+        };
+        await axios.post<CommonTypes.Message>(
+          productTypeURL,
+          productTypeRequestBody
+        );
+
+        // Request add product technical
+        const productTechnicalURL = getRequestURL("productTechnical");
+        const productTechnicalRequestBody: ProductTypes.ProductTechnicalRequestBody =
+          {
+            id: productId,
+            productTechnical: productDetailed.productTechnical,
+          };
+        await axios.post<CommonTypes.Message>(
+          productTechnicalURL,
+          productTechnicalRequestBody
+        );
+
+        // Request add product image
+        const productImageURL = getRequestURL("productImage");
+        const productImageRequestBody: ProductTypes.ProductImageRequestBody = {
+          id: productId,
+          productImage: productDetailed.productImage,
+        };
+        await axios.post<CommonTypes.Message>(
+          productImageURL,
+          productImageRequestBody
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  };
 
   return {
     productDetailed,
@@ -205,5 +265,8 @@ export const useProductDetailedContext = () => {
     addProductTechnical,
     editProductTechnical,
     deleteProductTechnical,
+
+    // Handle request
+    handleAddProduct,
   };
 };

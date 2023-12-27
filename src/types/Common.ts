@@ -5,3 +5,7 @@ export interface ChildrenProp {
 export interface Image {
   imageURL: string;
 }
+
+export interface Message {
+  message: string;
+}
