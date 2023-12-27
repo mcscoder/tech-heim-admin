@@ -49,4 +49,22 @@
   .font-body-xs {
     @apply text-xs font-light;
   }
+
+  .font-caption-xl {
+    @apply text-xl font-medium;
+  }
+
+  .font-caption-lg {
+    @apply text-lg font-medium;
+  }
+  .font-caption-md {
+    @apply text-base font-medium;
+  }
+  .font-caption-sm {
+    @apply text-sm font-medium;
+  }
+
+  .font-caption-xs {
+    @apply text-xs font-medium;
+  }
 }

@@ -1,11 +1,12 @@
 import { forwardRef } from "react";
 
 const VARIANTS = {
-  fill: "text-white bg-Primary hover:bg-primary-600",
+  fill: "text-white bg-Primary hover:bg-primary-600 border-2 border-Primary hover:border-primary-600",
   outlined:
     "text-Primary border-2 border-Primary hover:text-primary-600 hover:border-primary-600",
   text: "text-Primary hover:text-primary-600",
-  fillSecondary: "text-white bg-Secondary hover:bg-secondary-500",
+  fillSecondary:
+    "text-white bg-Secondary hover:bg-secondary-500 border-2 border-Secondary hover:border-secondary-500",
   outlinedSecondary:
     "text-Secondary border-2 border-Secondary hover:text-secondary-500 hover:border-secondary-500",
   textSecondary: "text-Secondary hover:text-secondary-500",
@@ -32,6 +33,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       disabled = false,
       className = "",
+      type = "button",
       ...props
     },
     ref
@@ -44,6 +46,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={buttonClasses}
         ref={ref}
         disabled={disabled}
+        type={type}
         {...props}
       >
         {startIcon && startIcon}

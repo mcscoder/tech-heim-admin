@@ -2,19 +2,29 @@ import { forwardRef } from "react";
 
 export type TextAreaProps =
   React.TextareaHTMLAttributes<HTMLTextAreaElement> & {
-    label?: string;
+    containerClassName?: string;
+    label?: React.ReactNode;
     labelClassName?: string;
   };
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   function TextArea(
-    { id, label, labelClassName = "", className = "", ...props },
+    {
+      id,
+      rows = 2,
+      containerClassName = "",
+      label,
+      labelClassName = "",
+      className = "",
+      ...props
+    },
     ref
   ) {
-    const textAreaClasses = `flex flex-col gap-3 ${className}`;
+    const containerClasses = `flex flex-col gap-2 ${containerClassName}`;
+    const textAreaClasses = `border outline-none p-3 rounded-lg focus:border-Primary ${className}`;
 
     return (
-      <div className={textAreaClasses}>
+      <div className={containerClasses}>
         <label
           htmlFor={id}
           className={labelClassName}
@@ -23,7 +33,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         </label>
         <textarea
           id={id}
+          rows={rows}
           ref={ref}
+          className={textAreaClasses}
           {...props}
         />
       </div>

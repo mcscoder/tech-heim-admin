@@ -1,11 +1,21 @@
-export type SearchParamKeys = "categoryId" | "productTypeId" | "sort";
+export interface Product {
+  id?: number;
+  name: string;
+  currentPrice: number;
+  lastPrice: number | null;
+  quantity: number;
 
-export type SortTypes = "ascending" | "descending";
+  categoryId: number;
 
-export interface SearchParamTypes {
-  categoryId?: string;
-  productTypeId?: string;
-  sort?: SortTypes;
+  productTypeId: ProductTypeId[];
+
+  productTechnical: ProductTechnical[];
+
+  productImage: ProductImage[];
+}
+
+export interface ProductTypeId {
+  id: number;
 }
 
 export interface ProductImage {
@@ -17,30 +27,12 @@ export interface ProductTechnical {
   description: string;
 }
 
-export interface Product {
-  id: number;
-  name: string;
-  currentPrice: number;
-  lastPrice: number | null;
-  quantity: number;
-  sold: number;
-  rate: number;
-  categoryId: number;
-  productImage: ProductImage[];
-  productTechnical: ProductTechnical[];
-  productGroup: Pick<ProductGroup, "title" | "productType">[];
-}
-
 export type ProductRowResponseType = Pick<
   Product,
-  | "id"
-  | "name"
-  | "currentPrice"
-  | "lastPrice"
-  | "quantity"
-  | "sold"
-  | "categoryId"
->;
+  "id" | "name" | "currentPrice" | "lastPrice" | "quantity" | "categoryId"
+> & {
+  sold: number;
+};
 
 export interface ProductType {
   id: number;

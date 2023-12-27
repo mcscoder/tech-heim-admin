@@ -1,4 +1,4 @@
-import { ProductProvider } from "@/Providers";
+import { ProductDetailedProvider, ProductProvider } from "@/Providers";
 import { DefaultLayout } from "@/components/Layouts";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
@@ -10,6 +10,10 @@ export const appRouter = createBrowserRouter([
       {
         path: "product",
         Component: ProductProvider,
+      },
+      {
+        path: "product/:productId",
+        Component: ProductDetailedProvider,
       },
     ],
   },

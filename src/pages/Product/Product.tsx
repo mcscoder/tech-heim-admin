@@ -10,7 +10,6 @@ export const Product = () => {
       <div className="content-container flex flex-col my-12 gap-4">
         <div className="flex gap-4">
           <Select
-            className="p-3 rounded-lg bg-transparent border"
             defaultValue={0}
             onChange={(e) => {
               getProduct(parseInt(e.target.value));
