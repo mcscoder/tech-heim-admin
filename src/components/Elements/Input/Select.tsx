@@ -4,7 +4,7 @@ export type SelectProps = React.SelectHTMLAttributes<HTMLSelectElement>;
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   function Select({ children, className = "", ...props }, ref) {
-    const selectClasses = `p-3 rounded-lg bg-transparent border ${className}`;
+    const selectClasses = `p-3 rounded-lg bg-transparent border outline-none ${className}`;
 
     return (
       <select

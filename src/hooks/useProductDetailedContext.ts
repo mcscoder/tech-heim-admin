@@ -235,14 +235,19 @@ export const useProductDetailedContext = () => {
           id: productId,
           productImage: productDetailed.productImage,
         };
-        await axios.post<CommonTypes.Message>(
-          productImageURL,
-          productImageRequestBody
-        );
+        await new Promise((resolve) => {
+          setTimeout(async () => {
+            await axios.post<CommonTypes.Message>(
+              productImageURL,
+              productImageRequestBody
+            );
+            resolve("");
+          }, 2000);
+        });
       } catch (error) {
         console.log(error);
       } finally {
-        window.location.reload();
+        // window.location.reload();
       }
     });
   };
