@@ -6,6 +6,10 @@ export interface ProductDetailedContextType {
   setProductDetailed: React.Dispatch<
     React.SetStateAction<ProductTypes.Product>
   >;
+  productGroups: ProductTypes.ProductGroup[];
+  setProductGroups: React.Dispatch<
+    React.SetStateAction<ProductTypes.ProductGroup[]>
+  >;
 }
 
 export const ProductDetailedContext =

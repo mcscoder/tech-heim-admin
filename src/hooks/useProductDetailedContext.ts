@@ -1,6 +1,6 @@
 import { ProductDetailedContext } from "@/contexts";
 import { CommonTypes, ProductTypes } from "@/types";
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { useLoaderContext } from ".";
 import { getRequestURL } from "@/utils";
 import axios from "axios";
@@ -14,11 +14,13 @@ export const useProductDetailedContext = () => {
     );
   }
 
-  const { productDetailed, setProductDetailed } = productDetailedContext;
+  const {
+    productDetailed,
+    setProductDetailed,
+    productGroups,
+    setProductGroups,
+  } = productDetailedContext;
 
-  const [productGroups, setProductGroups] = useState<
-    ProductTypes.ProductGroup[]
-  >([]);
   const { handleFetchApi } = useLoaderContext();
 
   const currentProductTypeId = useRef<{ [key: number]: number | undefined }>(
@@ -30,58 +32,60 @@ export const useProductDetailedContext = () => {
     setProductDetailed((prev) => {
       return { ...prev, categoryId };
     });
+    getProductGroup(categoryId);
+  };
 
-    // request to the server with categoryId to get related group
-    const productGroupResponse: ProductTypes.ProductGroup[] = [
-      {
-        id: 1,
-        title: "Manufacturer",
-        productType: [
-          {
-            id: 1,
-            title: "Macbook",
+  const getProductGroup = (categoryId: number) => {
+    handleFetchApi(async () => {
+      try {
+        // request to the server with categoryId to get related group
+        const url = getRequestURL("productGroup");
+        const productGroupResponse = await axios.get<
+          ProductTypes.ProductGroup[]
+        >(url, {
+          params: {
+            categoryId: categoryId,
           },
-          {
-            id: 2,
-            title: "MSI",
-          },
-        ],
-      },
-      {
-        id: 2,
-        title: "Screen size",
-        productType: [
-          {
-            id: 3,
-            title: "13 inch",
-          },
-          {
-            id: 4,
-            title: "14 inch",
-          },
-          {
-            id: 5,
-            title: "15 inch",
-          },
-          {
-            id: 6,
-            title: "16 inch",
-          },
-        ],
-      },
-    ];
-    setProductGroups(productGroupResponse);
+        });
+        setProductGroups(productGroupResponse.data || []);
+      } catch (error) {
+        console.log(error);
+      }
+    });
   };
 
   const addProductGroup = (title: string) => {
-    // call api to add group
-    title;
+    handleFetchApi(async () => {
+      try {
+        const url = getRequestURL("productGroup");
+        const body: ProductTypes.AddProductGroupRequestBody = {
+          categoryId: productDetailed.categoryId,
+          title: title,
+        };
+        await axios.post<CommonTypes.Message>(url, body);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        getProductGroup(productDetailed.categoryId);
+      }
+    });
   };
 
   const addProductType = (productGroupId: number, title: string) => {
-    // call api to add product type
-    productGroupId;
-    title;
+    handleFetchApi(async () => {
+      try {
+        const url = getRequestURL("postProductType");
+        const body: ProductTypes.AddProductTypeRequestBody = {
+          productGroupId: productGroupId,
+          title: title,
+        };
+        await axios.post<CommonTypes.Message>(url, body);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        getProductGroup(productDetailed.categoryId);
+      }
+    });
   };
 
   const setProductTypeId = (productGroupId: number, productTypeId: number) => {
@@ -237,6 +241,8 @@ export const useProductDetailedContext = () => {
         );
       } catch (error) {
         console.log(error);
+      } finally {
+        window.location.reload();
       }
     });
   };

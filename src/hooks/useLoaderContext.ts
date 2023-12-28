@@ -12,12 +12,12 @@ export const useLoaderContext = () => {
 
   const handleFetchApi = async (fetchApi: () => Promise<void>) => {
     try {
-      setLoading(true);
+      setLoading((prev) => prev + 1);
       await fetchApi();
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      setLoading((prev) => prev - 1);
     }
   };
 

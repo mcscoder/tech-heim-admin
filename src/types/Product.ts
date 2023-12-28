@@ -60,3 +60,11 @@ export type ProductTechnicalRequestBody = Pick<Product, "productTechnical"> &
   ProductId;
 
 export type ProductImageRequestBody = Pick<Product, "productImage"> & ProductId;
+
+export type AddProductGroupRequestBody = Pick<Product, "categoryId"> &
+  Pick<ProductGroup, "title">;
+
+export interface AddProductTypeRequestBody {
+  productGroupId: number;
+  title: string;
+}

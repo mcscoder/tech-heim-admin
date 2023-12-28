@@ -5,7 +5,7 @@ import { ProductTypes } from "@/types";
 import { useRef, useState } from "react";
 
 export const ProductGroup = ({
-  id,
+  id: productGroupId,
   title,
   productType,
 }: ProductTypes.ProductGroup) => {
@@ -13,22 +13,26 @@ export const ProductGroup = ({
 
   const [isAddProductType, setAddProductType] = useState<boolean>(false);
   const productTypeRef = useRef<HTMLInputElement>(null);
-
   return (
     <div className="flex flex-col gap-2">
       <label className="font-body-lg">{title}</label>
-      <Select onChange={(e) => setProductTypeId(id, parseInt(e.target.value))}>
+      <Select
+        onChange={(e) =>
+          setProductTypeId(productGroupId, parseInt(e.target.value))
+        }
+      >
         <option value={0}>Select {title}</option>;
-        {productType.map((productType, index) => {
-          return (
-            <option
-              key={index}
-              value={productType.id}
-            >
-              {productType.title}
-            </option>
-          );
-        })}
+        {productType &&
+          productType.map((productType, index) => {
+            return (
+              <option
+                key={index}
+                value={productType.id}
+              >
+                {productType.title}
+              </option>
+            );
+          })}
       </Select>
       <Button onClick={() => setAddProductType(true)}>Add {title}</Button>
       {isAddProductType && (
@@ -37,7 +41,7 @@ export const ProductGroup = ({
           buttonLabel="Add"
           onClickButton={() => {
             if (productTypeRef.current?.value) {
-              addProductType(id, productTypeRef.current.value);
+              addProductType(productGroupId, productTypeRef.current.value);
             }
             setAddProductType(false);
           }}

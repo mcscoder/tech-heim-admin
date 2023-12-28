@@ -59,7 +59,7 @@ export const ProductCategory = () => {
             </Button>
           )}
         </div>
-        {productDetailed.categoryId !== 0 && (
+        {productGroups.length !== 0 && (
           <div className="grid grid-cols-4 gap-6">
             {productGroups.map((productGroup, index) => {
               return (

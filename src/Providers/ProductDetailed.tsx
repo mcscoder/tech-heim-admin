@@ -16,9 +16,18 @@ export const ProductDetailedProvider = () => {
     productImage: [],
   });
 
+  const [productGroups, setProductGroups] = useState<
+    ProductTypes.ProductGroup[]
+  >([]);
+
   return (
     <ProductDetailedContext.Provider
-      value={{ productDetailed, setProductDetailed }}
+      value={{
+        productDetailed,
+        setProductDetailed,
+        productGroups,
+        setProductGroups,
+      }}
     >
       <ProductDetailed />
     </ProductDetailedContext.Provider>
