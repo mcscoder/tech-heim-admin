@@ -1,11 +1,14 @@
 import { ProductTypes } from "@/types";
 import { ProductRow } from ".";
+import { useProductContext } from "@/hooks";
 
 export interface ProductListProps {
   productRows: ProductTypes.ProductRowResponseType[];
 }
 
 export const ProductList = ({ productRows }: ProductListProps) => {
+  const { deleteProduct } = useProductContext();
+
   return (
     <table className="border-collapse">
       <thead>
@@ -24,6 +27,7 @@ export const ProductList = ({ productRows }: ProductListProps) => {
           return (
             <ProductRow
               key={index}
+              onClickRemove={() => deleteProduct(item.id as number)}
               {...item}
             />
           );

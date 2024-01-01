@@ -4,5 +4,5 @@ export const handleNumberInput = (e: React.ChangeEvent<HTMLInputElement>) => {
 };
 
 export const productPath = (productId: number) => {
-  return `http://25.10.56.237:5173/product/${productId}`;
+  return `http://25.10.56.237:1025/product/${productId}`;
 };

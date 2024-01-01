@@ -4,17 +4,25 @@ import { formatVND, productPath } from "@/utils";
 import { Button } from "..";
 import { Link } from "react-router-dom";
 
+export type ProductRowProps = ProductTypes.ProductRowResponseType & {
+  onClickEdit?: () => void;
+  onClickRemove?: () => void;
+};
+
 export const ProductRow = ({
-  id,
+  id = 0,
   name,
   categoryId,
   currentPrice,
   lastPrice,
   quantity,
   sold,
-}: ProductTypes.ProductRowResponseType) => {
+  onClickRemove = () => {},
+}: ProductRowProps) => {
   const handleOnClickEdit = () => {};
-  const handleOnClickRemove = () => {};
+  const handleOnClickRemove = () => {
+    onClickRemove();
+  };
 
   return (
     <tr className="relative group">

@@ -37,5 +37,18 @@ export const useProductContext = () => {
     });
   };
 
-  return { productRows, setProductRows, getProduct };
+  const deleteProduct = (productId: number) => {
+    handleFetchApi(async () => {
+      try {
+        const url = getRequestURL("deleteProduct");
+        await axios.post(url, {
+          productId: productId,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  };
+
+  return { productRows, setProductRows, getProduct, deleteProduct };
 };
