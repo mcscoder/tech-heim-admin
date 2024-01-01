@@ -23,15 +23,16 @@ export const ProductList = ({ productRows }: ProductListProps) => {
         </tr>
       </thead>
       <tbody>
-        {productRows.map((item, index) => {
-          return (
-            <ProductRow
-              key={index}
-              onClickRemove={() => deleteProduct(item.id as number)}
-              {...item}
-            />
-          );
-        })}
+        {productRows &&
+          productRows.map((item, index) => {
+            return (
+              <ProductRow
+                key={index}
+                onClickRemove={() => deleteProduct(item.id as number)}
+                {...item}
+              />
+            );
+          })}
       </tbody>
     </table>
   );

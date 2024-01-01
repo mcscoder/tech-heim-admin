@@ -23,7 +23,7 @@
 
   td,
   th {
-    @apply border border-[#dddddd] text-center whitespace-nowrap p-3 bg-clip-padding;
+    @apply border border-[#dddddd] text-center p-3 bg-clip-padding whitespace-nowrap;
   }
 }
 

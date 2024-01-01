@@ -30,7 +30,7 @@ export const ProductRow = ({
       <td className="text-left">
         <Link
           to={productPath(id)}
-          className="text-blue-500 underline hover:text-blue-900"
+          className="text-blue-500 underline hover:text-blue-900 line-clamp-2 whitespace-normal"
           target="_blank"
         >
           {name}
