@@ -4,9 +4,11 @@ import { useLoaderContext } from ".";
 import { getRequestURL } from "@/utils";
 import axios from "axios";
 import { ProductTypes } from "@/types";
+import { useSearchParams } from "react-router-dom";
 
 export const useProductContext = () => {
   const productContext = useContext(ProductContext);
+  const [params] = useSearchParams();
 
   if (!productContext) {
     throw new Error("useProductContext must be used within ProductProvider");
@@ -15,18 +17,15 @@ export const useProductContext = () => {
   const { productRows, setProductRows } = productContext;
   const { handleFetchApi } = useLoaderContext();
 
-  const getProduct = (categoryId?: number) => {
-    if (categoryId === 0) {
-      categoryId = undefined;
-    }
-
+  const getProduct = () => {
+    const categoryId = params.get("categoryId");
     handleFetchApi(async () => {
       try {
         const url = getRequestURL("product");
         const response = await axios.get<ProductTypes.ProductRowResponseType[]>(
           url,
           {
-            params: { ...(categoryId && { categoryId }) },
+            params: { ...(categoryId && { categoryId: parseInt(categoryId) }) },
           }
         );
 
@@ -42,10 +41,12 @@ export const useProductContext = () => {
       try {
         const url = getRequestURL("deleteProduct");
         await axios.post(url, {
-          productId: productId,
+          id: productId,
         });
       } catch (error) {
         console.log(error);
+      } finally {
+        getProduct();
       }
     });
   };
