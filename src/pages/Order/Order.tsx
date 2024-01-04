@@ -1,3 +1,9 @@
+import { CommonPage } from "@/components";
+
 export const Order = () => {
-  return <div>Order</div>;
+  return (
+    <CommonPage title="Order">
+      <div>Order</div>
+    </CommonPage>
+  );
 };

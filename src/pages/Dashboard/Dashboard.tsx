@@ -1,3 +1,9 @@
+import { CommonPage } from "@/components";
+
 export const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <CommonPage title="Dashboard">
+      <div>Dashboard</div>
+    </CommonPage>
+  );
 };
