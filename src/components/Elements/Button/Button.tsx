@@ -3,7 +3,7 @@ import { forwardRef } from "react";
 const VARIANTS = {
   filled: "text-white bg-Gray-Dark border border-Gray-Dark",
   outlined: "text-Gray-Dark bg-white border border-gray-950",
-  text: "text-Gray-Dark bg-transparent border border-transparent",
+  text: "text-Gray-Dark bg-transparent hover:bg-black/5 border border-transparent",
 };
 
 const SIZES = {
@@ -32,7 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) {
-    const buttonClasses = `${VARIANTS[variant]} ${SIZES[size]} ${className}`;
+    const buttonClasses = `${VARIANTS[variant]} ${SIZES[size]} ${className} inline-flex items-center gap-2 rounded-lg`;
     return (
       <button
         className={buttonClasses}

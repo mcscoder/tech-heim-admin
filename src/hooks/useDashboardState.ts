@@ -2,7 +2,7 @@ import { ProductTypes } from "@/types";
 import { getRequestURL } from "@/utils";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLoaderContext } from "./useLoaderContext";
+import { useLoaderContext } from ".";
 
 export const useDashboardState = () => {
   const [products, setProducts] = useState<ProductTypes.ProductCardType[][]>(

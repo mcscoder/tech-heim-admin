@@ -26,19 +26,8 @@ export interface Product {
   quantity: number;
   sold: number;
   rate: number;
+  categoryId: number;
   productImage: ProductImage[];
   productTechnical: ProductTechnical[];
   productGroup: Pick<ProductGroup, "title" | "productType">[];
 }
-
-export type ProductCardType = Pick<
-  Product,
-  | "id"
-  | "name"
-  | "currentPrice"
-  | "lastPrice"
-  | "quantity"
-  | "sold"
-  | "rate"
-  | "productImage"
->;
