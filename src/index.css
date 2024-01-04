@@ -11,6 +11,10 @@
   body {
     @apply font-inter;
   }
+
+  button {
+    @apply disabled:pointer-events-none disabled:opacity-50;
+  }
 }
 
 @layer components {
