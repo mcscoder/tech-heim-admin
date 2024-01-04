@@ -2,7 +2,7 @@ import { CommonPage, OrderStatCard, ProductStatCard } from "@/components";
 import { useDashboardState } from "@/hooks";
 
 export const Dashboard = () => {
-  const { bestSellers } = useDashboardState();
+  const { products } = useDashboardState();
 
   return (
     <CommonPage title="Dashboard">
@@ -24,7 +24,16 @@ export const Dashboard = () => {
         />
         <ProductStatCard
           title="Best Sellers"
-          bestSellers={bestSellers}
+          products={products[0]}
+        />
+        <ProductStatCard
+          title="New Products"
+          products={products[1]}
+        />
+        <ProductStatCard
+          title="Low stock"
+          products={products[1]}
+          isLowStock
         />
       </div>
     </CommonPage>

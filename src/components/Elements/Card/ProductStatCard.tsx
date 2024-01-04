@@ -6,13 +6,15 @@ import { Link } from "react-router-dom";
 export interface ProductStatCardProps {
   title: string;
   className?: string;
-  bestSellers: ProductTypes.ProductCardType[];
+  products: ProductTypes.ProductCardType[];
+  isLowStock?: boolean;
 }
 
 export const ProductStatCard = ({
   title,
   className = "",
-  bestSellers = [],
+  products = [],
+  isLowStock,
 }: ProductStatCardProps) => {
   return (
     <ContentSection className={`flex flex-col gap-4 p-6 ${className}`}>
@@ -20,8 +22,8 @@ export const ProductStatCard = ({
         <h3 className="font-body-bold text-[20px] text-black">{title}</h3>
       </div>
       <div className="h-[1px] bg-black"></div>
-      {bestSellers.length !== 0 &&
-        bestSellers.slice(0, 5).map((item, index) => {
+      {products.length !== 0 &&
+        products.slice(0, 5).map((item, index) => {
           return (
             <div
               className="flex flex-col gap-4"
@@ -31,8 +33,8 @@ export const ProductStatCard = ({
                 <img
                   src={item.productImage[0].imageURL}
                   alt={item.name}
-                  width={64}
-                  height={64}
+                  width={100}
+                  height={100}
                   className="object-cover rounded-lg"
                 />
                 <div className="flex justify-between gap-10 text-[16px] flex-1">
@@ -44,7 +46,17 @@ export const ProductStatCard = ({
                   </Link>
                   <div className="flex flex-col items-end flex-1 font-body-bold">
                     <p>{formatVND(item.currentPrice)}</p>
-                    <p className="text-Gray-Main">{item.sold} Sales</p>
+                    {isLowStock ? (
+                      <p className="text-Gray-Main">
+                        <span className="text-red-500">{item.quantity}</span> In
+                        stock
+                      </p>
+                    ) : (
+                      <p className="text-Gray-Main">
+                        <span className="text-green-500">{item.sold}</span>{" "}
+                        sales
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>

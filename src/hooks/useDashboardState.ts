@@ -5,29 +5,41 @@ import { useEffect, useState } from "react";
 import { useLoaderContext } from "./useLoaderContext";
 
 export const useDashboardState = () => {
-  const [bestSellers, setBestSellers] = useState<
-    ProductTypes.ProductCardType[]
-  >([]);
+  const [products, setProducts] = useState<ProductTypes.ProductCardType[][]>(
+    []
+  );
 
   const { handleFetchApi } = useLoaderContext();
 
   useEffect(() => {
     handleFetchApi(async () => {
       try {
-        const bestSellersURL = getRequestURL("homeProduct");
+        const url = getRequestURL("homeProduct");
+
         const bestSellersResponse = await axios.get<
           ProductTypes.ProductCardType[]
-        >(bestSellersURL, {
+        >(url, {
           params: {
             "best-seller": true,
           },
+          timeout: 3000,
         });
-        setBestSellers(bestSellersResponse.data);
+
+        const newProductsResponse = await axios.get<
+          ProductTypes.ProductCardType[]
+        >(url, {
+          params: {
+            "new-product": true,
+          },
+          timeout: 3000,
+        });
+
+        setProducts([bestSellersResponse.data, newProductsResponse.data]);
       } catch (error) {
         console.log(error);
       }
     });
   }, []);
 
-  return { bestSellers };
+  return { products };
 };
