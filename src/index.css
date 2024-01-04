@@ -18,10 +18,6 @@
 }
 
 @layer components {
-  .font-heading {
-    @apply font-semibold leading-normal;
-  }
-
   .font-body-bold {
     @apply font-semibold leading-normal;
   }
