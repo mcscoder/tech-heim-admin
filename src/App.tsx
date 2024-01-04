@@ -1,5 +1,12 @@
+import { AppState } from "./providers";
+import { AppProvider } from "./routes";
+
 function App() {
-  return <div className="text-[64px]">Hello word</div>;
+  return (
+    <AppState>
+      <AppProvider />
+    </AppState>
+  );
 }
 
 export default App;
