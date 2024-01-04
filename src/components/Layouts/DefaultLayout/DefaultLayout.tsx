@@ -3,7 +3,7 @@ import { Header } from "..";
 
 export const DefaultLayout = () => {
   return (
-    <div className="flex h-screen ml-[260px] bg-Gray-Normal">
+    <div className="flex min-h-screen ml-[260px] bg-Gray-Normal">
       <Header />
       <main className="flex-1">
         <Outlet />
