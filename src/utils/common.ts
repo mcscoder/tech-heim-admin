@@ -7,3 +7,8 @@ export const dateConversion = (dateString: string): string => {
 export const productPath = (productId: number) => {
   return `http://localhost:1025/product/${productId}`;
 };
+
+export const handleNumberInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const regex = /\D/g;
+  e.target.value = e.target.value.replace(regex, "");
+};
