@@ -15,8 +15,14 @@ import MobileIcon from "@/assets/icons/mobile.svg?react";
 import TabletIcon from "@/assets/icons/tablet.svg?react";
 import WatchStatusIcon from "@/assets/icons/watch-status.svg?react";
 import MenuIcon from "@/assets/icons/menu.svg?react";
+import TrashIcon from "@/assets/icons/trash.svg?react";
+import PlusIcon from "@/assets/icons/plus.svg?react";
+import EditIcon from "@/assets/icons/edit.svg?react";
 
 export {
+  EditIcon,
+  PlusIcon,
+  TrashIcon,
   MenuIcon,
   AlbumIcon,
   DashboardIcon,

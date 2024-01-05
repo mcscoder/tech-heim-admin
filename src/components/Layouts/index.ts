@@ -6,3 +6,4 @@ export * from "./Loader";
 export * from "./OrderList";
 export * from "./CategoryList";
 export * from "./Overlay";
+export * from "./ImageUpload";
