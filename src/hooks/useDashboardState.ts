@@ -34,7 +34,18 @@ export const useDashboardState = () => {
           }
         );
 
-        setProducts([bestSellersResponse.data, newProductsResponse.data]);
+        const lowStockResponse = await axios.get<ProductTypes.Product[]>(url, {
+          params: {
+            lowstock: true,
+          },
+          timeout: 3000,
+        });
+
+        setProducts([
+          bestSellersResponse.data,
+          newProductsResponse.data,
+          lowStockResponse.data,
+        ]);
       } catch (error) {
         console.log(error);
       }

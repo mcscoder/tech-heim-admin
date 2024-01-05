@@ -37,7 +37,7 @@ export const Dashboard = () => {
         />
         <ProductStatCard
           title="Low stock"
-          products={products[1]}
+          products={products[2]}
           isLowStock
         />
         <OrderList
