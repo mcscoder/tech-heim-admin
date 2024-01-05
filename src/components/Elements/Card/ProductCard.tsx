@@ -21,7 +21,7 @@ export const ProductCard = ({
 
   return (
     <ContentSection className="flex flex-col gap-4 p-4">
-      <div className="flex gap-4 flex-1">
+      <div className="flex gap-4">
         <img
           src={productImage[0].imageURL}
           alt={name}
@@ -35,6 +35,7 @@ export const ProductCard = ({
               <Link
                 to={productPath(id)}
                 className="hover:text-blue-500"
+                target="_blank"
               >
                 <h3 className="line-clamp-2 break-all text-[16px]">{name}</h3>
               </Link>
@@ -85,7 +86,7 @@ export const ProductCard = ({
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2 flex-1">
         <div className="flex items-center justify-start">
           <h4 className="font-medium">Product Types</h4>
         </div>

@@ -10,6 +10,7 @@ import {
   GameIcon,
   HeadPhoneIcon,
   LaptopIcon,
+  MenuIcon,
   MobileIcon,
   TabletIcon,
   WatchStatusIcon,
@@ -18,6 +19,10 @@ import {
 import { useSearchParams } from "react-router-dom";
 
 export const categoryItems: CategoryButtonProps[] = [
+  {
+    icon: <MenuIcon />,
+    label: "All",
+  },
   {
     icon: <MobileIcon />,
     label: "Mobile",
@@ -63,8 +68,8 @@ export const CategoryList = () => {
     <ContentSection className="flex items-center justify-center gap-8 px-10 py-5">
       <section className="content-container flex items-center justify-center gap-8">
         {categoryItems.map((categoryItem, index) => {
-          const categoryId = index + 1;
-          const currentCategoryId = params.get(searchParams.categoryId);
+          const categoryId = index;
+          const currentCategoryId = params.get(searchParams.categoryId) || "0";
           return (
             <CategoryButton
               key={categoryId}
@@ -73,7 +78,11 @@ export const CategoryList = () => {
               label={categoryItem.label}
               onClick={() =>
                 setParams((prev) => {
-                  prev.set(searchParams.categoryId, `${categoryId}`);
+                  if (categoryId === 0) {
+                    prev.delete(searchParams.categoryId);
+                  } else {
+                    prev.set(searchParams.categoryId, `${categoryId}`);
+                  }
                   return prev;
                 })
               }

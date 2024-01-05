@@ -5,9 +5,7 @@ import { useEffect, useState } from "react";
 import { useLoaderContext } from ".";
 
 export const useDashboardState = () => {
-  const [products, setProducts] = useState<ProductTypes.ProductCardType[][]>(
-    []
-  );
+  const [products, setProducts] = useState<ProductTypes.Product[][]>([]);
 
   const { handleFetchApi } = useLoaderContext();
 
@@ -16,23 +14,25 @@ export const useDashboardState = () => {
       try {
         const url = getRequestURL("homeProduct");
 
-        const bestSellersResponse = await axios.get<
-          ProductTypes.ProductCardType[]
-        >(url, {
-          params: {
-            "best-seller": true,
-          },
-          timeout: 3000,
-        });
+        const bestSellersResponse = await axios.get<ProductTypes.Product[]>(
+          url,
+          {
+            params: {
+              "best-seller": true,
+            },
+            timeout: 3000,
+          }
+        );
 
-        const newProductsResponse = await axios.get<
-          ProductTypes.ProductCardType[]
-        >(url, {
-          params: {
-            "new-product": true,
-          },
-          timeout: 3000,
-        });
+        const newProductsResponse = await axios.get<ProductTypes.Product[]>(
+          url,
+          {
+            params: {
+              "new-product": true,
+            },
+            timeout: 3000,
+          }
+        );
 
         setProducts([bestSellersResponse.data, newProductsResponse.data]);
       } catch (error) {

@@ -1,8 +1,10 @@
 export interface ProductImage {
+  id: number;
   imageURL: string;
 }
 
 export interface ProductTechnical {
+  id: number;
   title: string;
   description: string;
 }

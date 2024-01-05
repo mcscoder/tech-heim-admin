@@ -14,8 +14,10 @@ import LaptopIcon from "@/assets/icons/laptop.svg?react";
 import MobileIcon from "@/assets/icons/mobile.svg?react";
 import TabletIcon from "@/assets/icons/tablet.svg?react";
 import WatchStatusIcon from "@/assets/icons/watch-status.svg?react";
+import MenuIcon from "@/assets/icons/menu.svg?react";
 
 export {
+  MenuIcon,
   AlbumIcon,
   DashboardIcon,
   DocumentTextIcon,
