@@ -1,10 +1,10 @@
 import { Button, Chip, ContentSection, categoryItems } from "@/components";
 import { BinIcon, PenIcon, ThreeDotsIcon } from "@/constants";
-import { useBooleanState } from "@/hooks";
+import { useBooleanState, useProductContext } from "@/hooks";
 import { ProductTypes } from "@/types";
-import { formatVND, productPath } from "@/utils";
+import { editProductPath, formatVND, productPath } from "@/utils";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const ProductCard = ({
   id,
@@ -18,12 +18,14 @@ export const ProductCard = ({
   productGroup,
 }: ProductTypes.Product) => {
   const { state, toggle } = useBooleanState();
+  const { deleteProduct } = useProductContext();
+  const navigate = useNavigate();
 
   return (
     <ContentSection className="flex flex-col gap-4 p-4">
       <div className="flex gap-4">
         <img
-          src={productImage[0].imageURL}
+          src={productImage && productImage[0].imageURL}
           alt={name}
           width={100}
           height={100}
@@ -62,6 +64,7 @@ export const ProductCard = ({
                     variant="text"
                     startIcon={<PenIcon />}
                     className="text-blue-600"
+                    onClick={() => navigate(editProductPath(id))}
                   >
                     Edit
                   </Button>
@@ -69,6 +72,7 @@ export const ProductCard = ({
                     variant="text"
                     startIcon={<BinIcon />}
                     className="text-red-500"
+                    onClick={() => deleteProduct(id)}
                   >
                     Remove
                   </Button>

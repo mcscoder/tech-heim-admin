@@ -31,7 +31,7 @@ export interface Product {
   categoryId: number;
   productImage: ProductImage[];
   productTechnical: ProductTechnical[];
-  productGroup: Pick<ProductGroup, "title" | "productType">[];
+  productGroup: ProductGroup[];
 }
 
 export interface NewProduct {

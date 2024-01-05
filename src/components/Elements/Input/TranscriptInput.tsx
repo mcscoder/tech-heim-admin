@@ -32,9 +32,10 @@ export const TranscriptInput = ({
   dataAccepted = "string",
   inputRef,
   onChangeValue = () => {},
+  defaultValue = "",
   ...props
 }: TranscriptInputProps) => {
-  const [inputData, setInputData] = useState<string>();
+  const [inputData, setInputData] = useState<string>(`${defaultValue}`);
 
   const transcriptContainerClasses = `flex flex-col gap-2 ${transcriptContainerClassName}`;
 
@@ -51,6 +52,7 @@ export const TranscriptInput = ({
           );
         }}
         ref={inputRef}
+        defaultValue={defaultValue}
         {...props}
       />
       <p className="font-caption-sm">

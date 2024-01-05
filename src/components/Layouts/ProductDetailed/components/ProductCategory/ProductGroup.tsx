@@ -9,17 +9,24 @@ export const ProductGroup = ({
   title,
   productType,
 }: ProductTypes.ProductGroup) => {
-  const { setProductTypeId, addProductType } = useProductDetailedContext();
+  const { productDetailed, setProductTypeId, addProductType } =
+    useProductDetailedContext();
 
   const [isAddProductType, setAddProductType] = useState<boolean>(false);
   const productTypeRef = useRef<HTMLInputElement>(null);
+
+  const selectedId = productDetailed.productTypeId.find((value) =>
+    productType.some((type) => type.id === value.id)
+  );
+
   return (
     <div className="flex flex-col gap-2">
       <label className="font-body-lg">{title}</label>
       <Select
-        onChange={(e) =>
-          setProductTypeId(productGroupId, parseInt(e.target.value))
-        }
+        defaultValue={selectedId?.id || 0}
+        onChange={(e) => {
+          setProductTypeId(productGroupId, parseInt(e.target.value));
+        }}
       >
         <option value={0}>Select {title}</option>;
         {productType &&

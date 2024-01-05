@@ -7,6 +7,7 @@ export const ProductInformation = () => {
     setProductCurrentPrice,
     setProductLastPrice,
     setProductQuantity,
+    productDetailed,
   } = useProductDetailedContext();
   const getOnChangeValue = (
     e:
@@ -27,6 +28,7 @@ export const ProductInformation = () => {
         labelClassName="font-body-lg"
         required
         onChange={(e) => setProductName(getOnChangeValue(e))}
+        defaultValue={productDetailed.name || ""}
       />
 
       {/* Product current price (only accept number) */}
@@ -38,6 +40,7 @@ export const ProductInformation = () => {
         labelClassName="font-body-lg"
         required
         onChangeValue={(value) => setProductCurrentPrice(value as number)}
+        defaultValue={productDetailed.currentPrice || ""}
       />
 
       {/* Product last price (only accept number) */}
@@ -58,6 +61,7 @@ export const ProductInformation = () => {
         onChangeValue={(value) =>
           setProductLastPrice(value ? (value as number) : null)
         }
+        defaultValue={productDetailed.lastPrice || ""}
       />
 
       {/* Product quantity (only accept number) */}
@@ -69,6 +73,7 @@ export const ProductInformation = () => {
         labelClassName="font-body-lg"
         required
         onChangeValue={(value) => setProductQuantity(value as number)}
+        defaultValue={productDetailed.quantity || ""}
       />
     </div>
   );

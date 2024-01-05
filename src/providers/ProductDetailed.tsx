@@ -1,6 +1,6 @@
 import { ProductDetailedContext } from "@/contexts";
 import { CommonTypes, ProductTypes } from "@/types";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export const ProductDetailedProvider = ({
   children,
@@ -22,6 +22,10 @@ export const ProductDetailedProvider = ({
     ProductTypes.ProductGroup[]
   >([]);
 
+  const currentProductTypeId = useRef<{ [key: number]: number | undefined }>(
+    {}
+  );
+
   return (
     <ProductDetailedContext.Provider
       value={{
@@ -29,6 +33,7 @@ export const ProductDetailedProvider = ({
         setProductDetailed,
         productGroups,
         setProductGroups,
+        currentProductTypeId,
       }}
     >
       {children}

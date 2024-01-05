@@ -1,9 +1,10 @@
 import { ProductDetailedContext } from "@/contexts";
 import { CommonTypes, ProductTypes } from "@/types";
-import { useContext, useRef } from "react";
-import { useLoaderContext } from ".";
+import { useContext } from "react";
+import { useLoaderContext, useProductContext } from ".";
 import { getRequestURL } from "@/utils";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export const useProductDetailedContext = () => {
   const productDetailedContext = useContext(ProductDetailedContext);
@@ -19,18 +20,18 @@ export const useProductDetailedContext = () => {
     setProductDetailed,
     productGroups,
     setProductGroups,
+    currentProductTypeId,
   } = productDetailedContext;
 
-  const { handleFetchApi } = useLoaderContext();
+  const { deleteProduct } = useProductContext();
+  const navigate = useNavigate();
 
-  const currentProductTypeId = useRef<{ [key: number]: number | undefined }>(
-    {}
-  );
+  const { handleFetchApi } = useLoaderContext();
 
   /* Product category --------------------------------------------------------- */
   const setCategoryId = (categoryId: number) => {
     setProductDetailed((prev) => {
-      return { ...prev, categoryId };
+      return { ...prev, categoryId, productTypeId: [] };
     });
     getProductGroup(categoryId);
   };
@@ -242,12 +243,15 @@ export const useProductDetailedContext = () => {
               productImageRequestBody
             );
             resolve("");
-          }, 2000);
+          }, 1000);
         });
+        if (productDetailed.id) {
+          deleteProduct(productDetailed.id);
+        }
       } catch (error) {
         console.log(error);
       } finally {
-        // window.location.reload();
+        navigate("/products");
       }
     });
   };
@@ -255,6 +259,9 @@ export const useProductDetailedContext = () => {
   return {
     productDetailed,
     productGroups,
+
+    setProductDetailed,
+    getProductGroup,
 
     // Product category
     setCategoryId,

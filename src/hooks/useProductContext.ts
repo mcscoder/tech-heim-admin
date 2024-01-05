@@ -1,5 +1,5 @@
 import { ProductContext } from "@/contexts";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { useLoaderContext } from ".";
 import { useSearchParams } from "react-router-dom";
 import { searchParams } from "@/constants";
@@ -18,10 +18,6 @@ export const useProductContext = () => {
   const { handleFetchApi } = useLoaderContext();
   const [params] = useSearchParams();
 
-  useEffect(() => {
-    getProducts();
-  }, [params.get(searchParams.categoryId)]);
-
   const getProducts = () => {
     const categoryId = params.get(searchParams.categoryId);
     handleFetchApi(async () => {
@@ -38,5 +34,20 @@ export const useProductContext = () => {
     });
   };
 
-  return { products };
+  const deleteProduct = (productId: number) => {
+    handleFetchApi(async () => {
+      try {
+        const url = getRequestURL("deleteProduct");
+        await axios.post(url, {
+          id: productId,
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        getProducts();
+      }
+    });
+  };
+
+  return { products, getProducts, deleteProduct };
 };

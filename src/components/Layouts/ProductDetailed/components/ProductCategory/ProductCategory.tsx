@@ -36,7 +36,7 @@ export const ProductCategory = () => {
         <div className="flex flex-col gap-2">
           <label className="font-body-lg">Category</label>
           <Select
-            defaultValue={0}
+            defaultValue={productDetailed.categoryId}
             onChange={(e) => setCategoryId(parseInt(e.target.value))}
           >
             {categories.map((item, index) => {

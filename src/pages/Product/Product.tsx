@@ -1,8 +1,17 @@
 import { CategoryList, CommonPage, ProductCard } from "@/components";
+import { searchParams } from "@/constants";
 import { useProductContext } from "@/hooks";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export const Product = () => {
-  const { products } = useProductContext();
+  const { products, getProducts } = useProductContext();
+
+  const [params] = useSearchParams();
+
+  useEffect(() => {
+    getProducts();
+  }, [params.get(searchParams.categoryId)]);
 
   return (
     <CommonPage title="All Product">
@@ -11,10 +20,10 @@ export const Product = () => {
       </div>
       <div className="grid grid-cols-3 gap-4">
         {products.length !== 0 &&
-          products.map((item, index) => {
+          products.map((item) => {
             return (
               <ProductCard
-                key={index}
+                key={item.id}
                 {...item}
               />
             );

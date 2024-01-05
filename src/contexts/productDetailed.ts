@@ -10,6 +10,9 @@ export interface ProductDetailedContextType {
   setProductGroups: React.Dispatch<
     React.SetStateAction<ProductTypes.ProductGroup[]>
   >;
+  currentProductTypeId: React.MutableRefObject<{
+    [key: number]: number | undefined;
+  }>;
 }
 
 export const ProductDetailedContext =
