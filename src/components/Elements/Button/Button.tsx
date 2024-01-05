@@ -28,6 +28,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       startIcon,
       endIcon,
       className = "",
+      type = "button",
       ...props
     },
     ref
@@ -36,6 +37,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         className={buttonClasses}
+        type={type}
         {...props}
         ref={ref}
       >

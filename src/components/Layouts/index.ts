@@ -7,3 +7,4 @@ export * from "./OrderList";
 export * from "./CategoryList";
 export * from "./Overlay";
 export * from "./ImageUpload";
+export * from "./ProductDetailed";
