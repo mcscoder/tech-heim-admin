@@ -4,10 +4,11 @@ import {
   OrderStatCard,
   ProductStatCard,
 } from "@/components";
-import { useDashboardState } from "@/hooks";
+import { useDashboardState, useOrderContext } from "@/hooks";
 
 export const Dashboard = () => {
   const { products, orderStats } = useDashboardState();
+  const { orders } = useOrderContext();
 
   if (products.length === 0 || orderStats.length === 0) {
     return <></>;
@@ -47,24 +48,7 @@ export const Dashboard = () => {
         <OrderList
           title="Recent Orders"
           className="col-span-3"
-          orders={[
-            {
-              id: "1",
-              createAt: "2024-01-05",
-              paymentMethod: "Credit Card",
-              customerName: "John Doe",
-              status: true,
-              amount: 100999999.0,
-            },
-            {
-              id: "2",
-              createAt: "2024-01-06",
-              paymentMethod: "PayPal",
-              customerName: "Jane Smith",
-              status: false,
-              amount: 100000000,
-            },
-          ]}
+          orders={orders}
         />
       </div>
     </CommonPage>

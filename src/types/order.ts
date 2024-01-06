@@ -1,10 +1,20 @@
+import { ProductTypes } from ".";
+
+export type OrderedProduct = Pick<
+  ProductTypes.Product,
+  "id" | "name" | "currentPrice" | "lastPrice" | "productImage"
+> & {
+  quantity: number;
+};
+
 export interface Order {
   id: string;
   createAt: string;
   paymentMethod: string;
-  customerName: string;
+  firstName: string;
+  lastName: string;
+  orderedProduct: OrderedProduct[];
   status: boolean;
-  amount: number;
 }
 
 export interface OrderStat {
