@@ -29,7 +29,7 @@ export interface TotalProductPriceType {
   totalLastPrice: number | null;
 }
 
-export const getTotalCartPrice = (
+export const getTotalPrice = (
   pricedProducts: PricedProductType[]
 ): TotalProductPriceType => {
   let totalCurrentPrice = 0;

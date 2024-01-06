@@ -3,3 +3,4 @@ export * from "./Product";
 export * from "./Order";
 export * from "./AddProduct";
 export * from "./EditProduct";
+export * from "./OrderDetailed";

@@ -1,5 +1,12 @@
 import { DefaultLayout } from "@/components";
-import { AddProduct, Dashboard, EditProduct, Order, Product } from "@/pages";
+import {
+  AddProduct,
+  Dashboard,
+  EditProduct,
+  Order,
+  OrderDetailed,
+  Product,
+} from "@/pages";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 const appRouters = createBrowserRouter([
@@ -26,6 +33,10 @@ const appRouters = createBrowserRouter([
       {
         path: "edit-product/:productId",
         Component: EditProduct,
+      },
+      {
+        path: "order-detailed/:orderId",
+        Component: OrderDetailed,
       },
     ],
   },

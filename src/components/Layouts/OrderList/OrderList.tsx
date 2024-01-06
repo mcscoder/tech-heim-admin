@@ -1,7 +1,7 @@
 import { OrderTypes } from "@/types";
 import { ContentSection } from "..";
 import { Link } from "react-router-dom";
-import { dateConversion, formatVND, getTotalCartPrice } from "@/utils";
+import { dateConversion, formatVND, getTotalPrice } from "@/utils";
 
 const tableHeading = [
   "Order ID",
@@ -54,7 +54,7 @@ export const OrderList = ({
                 >
                   <td>
                     <Link
-                      to="/"
+                      to={`/order-detailed/${item.id}`}
                       className="text-blue-500 underline"
                     >
                       #{item.id}
@@ -72,7 +72,7 @@ export const OrderList = ({
                   </td>
                   <td>
                     {formatVND(
-                      getTotalCartPrice(item.orderedProduct).totalCurrentPrice
+                      getTotalPrice(item.orderedProduct).totalCurrentPrice
                     )}
                   </td>
                 </tr>
