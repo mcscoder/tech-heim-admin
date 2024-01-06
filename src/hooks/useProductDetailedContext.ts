@@ -199,6 +199,7 @@ export const useProductDetailedContext = () => {
           currentPrice: productDetailed.currentPrice,
           lastPrice: productDetailed.lastPrice,
           quantity: productDetailed.quantity,
+          sold: productDetailed.sold,
           categoryId: productDetailed.categoryId,
         };
         const productResponse = await axios.post<ProductTypes.ProductId>(

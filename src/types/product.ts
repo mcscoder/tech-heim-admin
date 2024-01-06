@@ -40,6 +40,7 @@ export interface NewProduct {
   currentPrice: number;
   lastPrice: number | null;
   quantity: number;
+  sold: number;
 
   categoryId: number;
 
@@ -87,7 +88,7 @@ export interface ProductId {
 
 export type ProductRequestBody = Pick<
   NewProduct,
-  "name" | "currentPrice" | "lastPrice" | "quantity" | "categoryId"
+  "name" | "currentPrice" | "lastPrice" | "quantity" | "sold" | "categoryId"
 >;
 
 export type ProductTypeRequestBody = Pick<NewProduct, "productTypeId"> &

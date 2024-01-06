@@ -12,6 +12,7 @@ export const ProductDetailedProvider = ({
       currentPrice: 0,
       lastPrice: 0,
       quantity: 0,
+      sold: 0,
       categoryId: 0,
       productTypeId: [],
       productTechnical: [],

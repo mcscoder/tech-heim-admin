@@ -44,6 +44,7 @@ export const InitialProductDetailed = ({
             currentPrice: product.currentPrice,
             lastPrice: product.lastPrice,
             quantity: product.quantity,
+            sold: product.sold,
             categoryId: product.categoryId,
             productTypeId: productTypeId,
             productTechnical: product.productTechnical,

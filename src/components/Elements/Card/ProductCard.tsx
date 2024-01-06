@@ -91,9 +91,6 @@ export const ProductCard = ({
         </div>
       </div>
       <div className="flex flex-col gap-2 flex-1">
-        <div className="flex items-center justify-start">
-          <h4 className="font-medium">Product Types</h4>
-        </div>
         <div className="flex items-center gap-2 flex-wrap">
           {productGroup.map((group, index) => {
             return (
