@@ -1,4 +1,4 @@
-import { ProductTypes } from "@/types";
+import { OrderTypes, ProductTypes } from "@/types";
 import { getRequestURL } from "@/utils";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -7,15 +7,17 @@ import { useLoaderContext } from ".";
 export const useDashboardState = () => {
   const [products, setProducts] = useState<ProductTypes.Product[][]>([]);
 
+  const [orderStats, setOrderStats] = useState<OrderTypes.OrderStat[]>([]);
+
   const { handleFetchApi } = useLoaderContext();
 
   useEffect(() => {
     handleFetchApi(async () => {
       try {
-        const url = getRequestURL("homeProduct");
+        const productURL = getRequestURL("homeProduct");
 
         const bestSellersResponse = await axios.get<ProductTypes.Product[]>(
-          url,
+          productURL,
           {
             params: {
               "best-seller": true,
@@ -25,7 +27,7 @@ export const useDashboardState = () => {
         );
 
         const newProductsResponse = await axios.get<ProductTypes.Product[]>(
-          url,
+          productURL,
           {
             params: {
               "new-product": true,
@@ -34,23 +36,32 @@ export const useDashboardState = () => {
           }
         );
 
-        const lowStockResponse = await axios.get<ProductTypes.Product[]>(url, {
-          params: {
-            lowstock: true,
-          },
-          timeout: 3000,
-        });
+        const lowStockResponse = await axios.get<ProductTypes.Product[]>(
+          productURL,
+          {
+            params: {
+              lowstock: true,
+            },
+            timeout: 3000,
+          }
+        );
+
+        const orderStatURL = getRequestURL("orderStat");
+
+        const orderStatsResponse =
+          await axios.get<OrderTypes.OrderStat[]>(orderStatURL);
 
         setProducts([
           bestSellersResponse.data,
           newProductsResponse.data,
           lowStockResponse.data,
         ]);
+        setOrderStats(orderStatsResponse.data);
       } catch (error) {
         console.log(error);
       }
     });
   }, []);
 
-  return { products };
+  return { products, orderStats };
 };

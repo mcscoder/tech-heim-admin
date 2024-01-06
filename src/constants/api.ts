@@ -9,5 +9,6 @@ export const apiEndPoint = {
   productTechnical: "/product/product-technical",
   productImage: "/product/product-image",
   deleteProduct: "/product/delete",
+  orderStat: "/admin/order-stat",
 };
 export type ApiEndPointTypes = keyof typeof apiEndPoint;

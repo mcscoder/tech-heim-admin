@@ -6,3 +6,8 @@ export interface Order {
   status: boolean;
   amount: number;
 }
+
+export interface OrderStat {
+  total: number;
+  quantity: number;
+}
