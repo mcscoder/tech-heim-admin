@@ -16,12 +16,14 @@ export interface OrderListProps {
   title: string;
   className?: string;
   orders: OrderTypes.Order[];
+  fullList?: boolean;
 }
 
 export const OrderList = ({
   title,
   className = "",
   orders = [],
+  fullList,
 }: OrderListProps) => {
   return (
     <ContentSection className={`flex flex-col gap-4 p-6 ${className}`}>
@@ -46,7 +48,7 @@ export const OrderList = ({
         </thead>
         <tbody>
           {orders.length !== 0 &&
-            orders.slice(0, 10).map((item, index) => {
+            (fullList ? orders : orders.slice(0, 10)).map((item, index) => {
               return (
                 <tr
                   key={index}
